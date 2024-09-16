@@ -142,8 +142,7 @@ public class Ball extends Actor
     {
         if (isTouching(Paddle.class) && !hasBouncedVertically)
         {
-            
-                revertVertically();
+            revertVertically();
             
         }
         else
