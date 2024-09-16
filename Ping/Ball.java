@@ -54,6 +54,8 @@ public class Ball extends Actor
             move(speed);
             checkBounceOffWalls();
             checkBounceOffCeiling();
+            checkBounceOffPaddle();
+            checkBounceOffRandPaddle();
             checkRestart();
         }
     }    
@@ -73,7 +75,18 @@ public class Ball extends Actor
     {
         return (getY() <= BALL_SIZE/2);
     }
-
+    
+    private boolean isTouchingRandPaddleDirection() {
+        if (isTouching(RandPaddle.class) && getRotation() >= 180)
+        {
+            revertVertically();
+            //Greenfoot.stop();
+            return (getY() <= BALL_SIZE/2);
+        } else {
+            return false;
+        }
+    }
+    
     /**
      * Returns true if the ball is touching the floor.
      */
@@ -119,7 +132,45 @@ public class Ball extends Actor
             hasBouncedVertically = false;
         }
     }
-
+    
+     /**
+     * Check to see if the ball should bounce off the ceiling.
+     * If touching the ceiling the ball is bouncing off.
+     */
+    
+    private void checkBounceOffPaddle()
+    {
+        if (isTouching(Paddle.class) && !hasBouncedVertically)
+        {
+            
+                revertVertically();
+            
+        }
+        else
+        {
+            hasBouncedVertically = false;
+        }
+    }   
+    
+         /**
+     * Check to see if the ball should bounce off the ceiling.
+     * If touching the ceiling the ball is bouncing off.
+     */
+    private void checkBounceOffRandPaddle()
+    {
+        if (isTouchingRandPaddleDirection())
+        {
+            if (! hasBouncedVertically)
+            {
+                revertVertically();
+            }
+        }
+        else
+        {
+            hasBouncedVertically = false;
+        }
+    }  
+    
     /**
      * Check to see if the ball should be restarted.
      * If touching the floor the ball is restarted in initial position and speed.
@@ -164,5 +215,5 @@ public class Ball extends Actor
         hasBouncedVertically = false;
         setRotation(Greenfoot.getRandomNumber(STARTING_ANGLE_WIDTH)+STARTING_ANGLE_WIDTH/2);
     }
-
 }
+
