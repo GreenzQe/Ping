@@ -12,7 +12,7 @@ public class PingWorld extends World
     private static final int WORLD_WIDTH = 500;
     private static final int WORLD_HEIGHT = 700;
 
-    GreenfootSound hitEffect = new GreenfootSound("Music.mp3");
+    GreenfootSound hitEffect = new GreenfootSound("Music.wav");
     /**
      * Constructor for objects of class PingWorld.
      */
@@ -26,7 +26,7 @@ public class PingWorld extends World
             addObject(new Ball(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
             addObject(new Paddle(100,20), 60, WORLD_HEIGHT - 50);
             addObject(new RandPaddle(100,20), 60, WORLD_HEIGHT - 300);
-            Greenfoot.playSound("Music.mp3");
+            Greenfoot.playSound("Music.wav");
         }
         else
         {
