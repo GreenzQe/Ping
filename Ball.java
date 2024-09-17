@@ -13,12 +13,26 @@ public class Ball extends Actor
     private static final int BOUNCE_DEVIANCE_MAX = 5;
     private static final int STARTING_ANGLE_WIDTH = 90;
     private static final int DELAY_TIME = 100;
+    
+    GreenfootSound hitEffect = new GreenfootSound("PadHit.wav");
+    
 
     private int speed;
     private boolean hasBouncedHorizontally;
     private boolean hasBouncedVertically;
     private int delay;
-
+    private static int counter = 0;
+    private int score = 0;
+    private static int level = 0;
+    
+    public static int getLevel() {
+        return level;
+    }
+    
+    public static int getCounter() {
+        return counter;
+    }
+    
     /**
      * Contructs the ball and sets it in motion!
      */
@@ -27,14 +41,29 @@ public class Ball extends Actor
         createImage();
         init();
     }
-
+    
     /**
      * Creates and sets an image of a black ball to this actor.
      */
+    
     private void createImage()
     {
         GreenfootImage ballImage = new GreenfootImage(BALL_SIZE,BALL_SIZE);
-        ballImage.setColor(Color.BLACK);
+        if (level == 1) {
+            ballImage.setColor(Color.RED);
+        } else if (level == 2) {
+            ballImage.setColor(Color.ORANGE);
+        } else if (level == 3) {
+            ballImage.setColor(Color.YELLOW);
+        } else if (level == 4) {
+            ballImage.setColor(Color.GREEN);
+        } else if (level == 5) {
+            ballImage.setColor(Color.BLUE);
+        } else if (level >= 6) {
+            ballImage.setColor(Color.MAGENTA);
+        } else {
+            ballImage.setColor(Color.GRAY);
+        }
         ballImage.fillOval(0, 0, BALL_SIZE, BALL_SIZE);
         setImage(ballImage);
     }
@@ -58,6 +87,10 @@ public class Ball extends Actor
             checkBounceOffRandPaddle();
             checkRestart();
         }
+        if (counter >= 10) {
+            counter = 0;
+            gameLevelUp();
+        }
     }    
 
     /**
@@ -80,11 +113,34 @@ public class Ball extends Actor
         if (isTouching(RandPaddle.class) && getRotation() >= 180)
         {
             revertVertically();
+            Greenfoot.playSound("PadHit.wav");
             //Greenfoot.stop();
             return (getY() <= BALL_SIZE/2);
         } else {
             return false;
         }
+    }
+    
+    private boolean isTouchingPaddleDirection() {
+        if (isTouching(Paddle.class) && getRotation() <= 180)
+        {
+            revertVertically();
+            Greenfoot.playSound("PadHit.wav");
+            //Greenfoot.stop();
+            counter++;
+            score++;
+            return (getY() <= BALL_SIZE/2);
+        } else {
+            return false;
+        }
+    }
+    
+    private void gameLevelUp()
+    {
+        speed++;
+        level++;
+        createImage();
+        
     }
     
     /**
@@ -94,7 +150,7 @@ public class Ball extends Actor
     { 
         return (getY() >= getWorld().getHeight() - BALL_SIZE/2);
     }
-
+    
     /**
      * Check to see if the ball should bounce off one of the walls.
      * If touching one of the walls, the ball is bouncing off.
@@ -106,6 +162,7 @@ public class Ball extends Actor
             if (! hasBouncedHorizontally)
             {
                 revertHorizontally();
+                Greenfoot.playSound("PadHit.wav");
             }
         }
         else
@@ -125,6 +182,7 @@ public class Ball extends Actor
             if (! hasBouncedVertically)
             {
                 revertVertically();
+                Greenfoot.playSound("PadHit.wav");
             }
         }
         else
@@ -140,10 +198,14 @@ public class Ball extends Actor
     
     private void checkBounceOffPaddle()
     {
-        if (isTouching(Paddle.class) && !hasBouncedVertically)
+        
+        if (isTouchingPaddleDirection() && !hasBouncedVertically)
         {
-            revertVertically();
-            
+            if (! hasBouncedVertically)
+            {
+                revertVertically();
+                
+            }
         }
         else
         {
@@ -157,7 +219,7 @@ public class Ball extends Actor
      */
     private void checkBounceOffRandPaddle()
     {
-        if (isTouchingRandPaddleDirection())
+        if (isTouchingRandPaddleDirection() && !hasBouncedVertically)
         {
             if (! hasBouncedVertically)
             {

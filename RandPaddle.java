@@ -41,7 +41,7 @@ public class RandPaddle extends Actor
     private void createImage()
     {
         GreenfootImage image = new GreenfootImage(width, height);
-        image.setColor(Color.BLACK);
+        image.setColor(Color.WHITE);
         image.fill();
         setImage(image);
     }
@@ -52,11 +52,11 @@ public class RandPaddle extends Actor
     {
         //Check to see if we are touching the outer boundaries of the world:
         // IF we are touching the right boundary OR we are touching the left boundary:
-        if(getX() + width/2 >= getWorld().getWidth() || getX() - width/2 <= 0)
+        if(getX() - width >= getWorld().getWidth() || getX() + width <= 0)
         {
             //Change our 'x' direction to the inverted direction:
             //dx = dx * -1;
-            setLocation(60, Greenfoot.getRandomNumber(150)+300);
+            setLocation(0 - width/2, Greenfoot.getRandomNumber(150)+300);
         }
     }
 }
