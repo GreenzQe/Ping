@@ -22,15 +22,24 @@ public class Ball extends Actor
     private boolean hasBouncedVertically;
     private int delay;
     private static int counter = 0;
-    private int score = 0;
+    private static int score = 0;
     private static int level = 0;
+    private static boolean restartLevel = false;
     
     public static int getLevel() {
         return level;
     }
     
+    public static int getScore() {
+        return score;
+    }
+    
     public static int getCounter() {
         return counter;
+    }
+    
+    public static boolean getRestartLevel() {
+        return restartLevel;
     }
     
     /**
@@ -140,7 +149,6 @@ public class Ball extends Actor
         speed++;
         level++;
         createImage();
-        
     }
     
     /**
@@ -242,6 +250,7 @@ public class Ball extends Actor
         {
             init();
             setLocation(getWorld().getWidth() / 2, getWorld().getHeight() / 2);
+            restartLevel = true;
         }
     }
 
@@ -275,6 +284,10 @@ public class Ball extends Actor
         hasBouncedHorizontally = false;
         hasBouncedVertically = false;
         setRotation(Greenfoot.getRandomNumber(STARTING_ANGLE_WIDTH)+STARTING_ANGLE_WIDTH/2);
+        counter = 0;
+        score = 0;
+        level = 0;
+        restartLevel = false;
     }
 }
 
