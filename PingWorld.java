@@ -33,5 +33,8 @@ public class PingWorld extends World
             Greenfoot.setWorld(new IntroWorld());
         }
     }
-
+    
+    public void act() {
+        showText("Score: " + Ball.getCounter() + "  Level: " + Ball.getLevel(), 100, 30);
+    }
 }
