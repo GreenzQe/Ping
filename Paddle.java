@@ -34,10 +34,10 @@ public class Paddle extends Actor
         level = Ball.getLevel();
         
         // Control movement
-        if (Greenfoot.isKeyDown("left")) {
+        if (Greenfoot.isKeyDown("left") && getX() >= 0) {
             move(-3);
         } 
-        if (Greenfoot.isKeyDown("right")) {
+        if (Greenfoot.isKeyDown("right") && getX() <= 500) {
             move(3);
         }
         

@@ -10,7 +10,7 @@ import greenfoot.*;
 public class Ball extends Actor
 {
     private static final int BALL_SIZE = 25;
-    private static final int BOUNCE_DEVIANCE_MAX = 5;
+    private static final int BOUNCE_DEVIANCE_MAX = 15;
     private static final int STARTING_ANGLE_WIDTH = 90;
     private static final int DELAY_TIME = 100;
     
@@ -248,7 +248,7 @@ public class Ball extends Actor
     {
         if (isTouchingFloor())
         {
-            init();
+            //init();
             setLocation(getWorld().getWidth() / 2, getWorld().getHeight() / 2);
             restartLevel = true;
         }
@@ -265,7 +265,7 @@ public class Ball extends Actor
     }
 
     /**
-     * Bounces the bal back from a horizontal surface.
+     * Bounces the ball back from a horizontal surface.
      */
     private void revertVertically()
     {

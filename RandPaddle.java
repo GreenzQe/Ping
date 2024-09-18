@@ -11,7 +11,6 @@ public class RandPaddle extends Actor
     private int width;
     private int height;
     private int dx;
-
     /**
      * Constructs a new paddle with the given dimensions.
      */
@@ -22,8 +21,6 @@ public class RandPaddle extends Actor
         dx = 1;
         createImage();
     }
-    
-
     
     /**
      * Act - do whatever the RandPaddle wants to do. This method is called whenever
@@ -57,6 +54,8 @@ public class RandPaddle extends Actor
             //Change our 'x' direction to the inverted direction:
             //dx = dx * -1;
             setLocation(0 - width/2, Greenfoot.getRandomNumber(150)+300);
+            width = 100 + Greenfoot.getRandomNumber(50);
+            createImage();
         }
     }
 }

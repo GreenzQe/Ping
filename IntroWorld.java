@@ -1,5 +1,4 @@
 import greenfoot.*;
-
 /**
  * Write a description of class IntroWorld here.
  * 
@@ -18,8 +17,14 @@ public class IntroWorld extends World
     {
         super(WORLD_WIDTH, WORLD_HEIGHT, 1); 
         GreenfootImage background = getBackground();
-        background.setColor(Color.BLACK);
-        background.drawString("Intro world. Hit <enter> to start game...", WORLD_WIDTH / 2 - 100, WORLD_HEIGHT / 2);
+        background.setColor(Color.RED);
+        if (Ball.getScore() >= 1) {
+            background.drawString("Last Score: " + Ball.getScore(), WORLD_WIDTH / 2 - 30, WORLD_HEIGHT / 2);
+            background.drawString("Hit <enter> to start game...", WORLD_WIDTH / 2 - 70, WORLD_HEIGHT / 2 + 30);
+        } else {
+            background.drawString("Intro world. Hit <enter> to start game...", WORLD_WIDTH / 2 - 100, WORLD_HEIGHT / 2);
+        }
+        
     }
     
     public void act()
