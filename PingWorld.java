@@ -28,6 +28,7 @@ public class PingWorld extends World
             addObject(new Ball(), WORLD_WIDTH/2, WORLD_HEIGHT/2);
             addObject(new Paddle(100,20), 60, WORLD_HEIGHT - 50);
             addObject(new RandPaddle(100,20), 60, WORLD_HEIGHT - 300);
+            addObject(new EnemyPaddle(100,20), 60, WORLD_HEIGHT - 650);
             
             sound.play();
         }
