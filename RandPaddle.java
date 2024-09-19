@@ -25,10 +25,11 @@ public class RandPaddle extends Actor
     /**
      * Act - do whatever the RandPaddle wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
+     * Moves the paddle.
      */
     public void act()
     {
-        tryChangeDirection();
+        changeLocationSize();
         setLocation(getX() + dx, getY());
     }
     
@@ -43,9 +44,9 @@ public class RandPaddle extends Actor
         setImage(image);
     }
     /**
-     * Will rotate the paddle 180 degrees if the paddle is at worlds edge.
+     * Will set the random paddle at an random x location and vary the size by a random amount.
      */
-    public void tryChangeDirection()
+    public void changeLocationSize()
     {
         //Check to see if we are touching the outer boundaries of the world:
         // IF we are touching the right boundary OR we are touching the left boundary:

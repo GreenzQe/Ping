@@ -47,12 +47,13 @@ public class Ball extends Actor
      */
     public Ball()
     {
-        createImage();
         init();
+        createImage();
     }
     
     /**
-     * Creates and sets an image of a black ball to this actor.
+     * Creates and sets an image of a gray ball to this actor.
+     * On game level up changes the image color to match the level.
      */
     
     private void createImage()
@@ -80,6 +81,9 @@ public class Ball extends Actor
     /**
      * Act - do whatever the Ball wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
+     * 
+     * Gives the ball a starting delay and then runs checks to keep the ball bouncing.
+     * For every 10 point counts, runs the gameLevelUp.
      */
     public void act() 
     {
@@ -118,6 +122,10 @@ public class Ball extends Actor
         return (getY() <= BALL_SIZE/2);
     }
     
+    /**
+     * Checks if the ball is touching the Random Paddle and from which direction.
+     * 
+     */
     private boolean isTouchingRandPaddleDirection() {
         if (isTouching(RandPaddle.class) && getRotation() >= 180)
         {
@@ -130,6 +138,10 @@ public class Ball extends Actor
         }
     }
     
+    /**
+     * Checks if the ball is touching the Paddle and from which direction.
+     * Adds to the counter and score.
+     */
     private boolean isTouchingPaddleDirection() {
         if (isTouching(Paddle.class) && getRotation() <= 180)
         {
@@ -144,6 +156,10 @@ public class Ball extends Actor
         }
     }
     
+    /**
+     * Runs on game level up and increases the speed and level counter.
+     * 
+     */
     private void gameLevelUp()
     {
         speed++;
@@ -200,8 +216,8 @@ public class Ball extends Actor
     }
     
      /**
-     * Check to see if the ball should bounce off the ceiling.
-     * If touching the ceiling the ball is bouncing off.
+     * Check to see if the ball should bounce off the paddle.
+     * If touching the paddle the ball is bouncing off.
      */
     
     private void checkBounceOffPaddle()
@@ -222,8 +238,8 @@ public class Ball extends Actor
     }   
     
          /**
-     * Check to see if the ball should bounce off the ceiling.
-     * If touching the ceiling the ball is bouncing off.
+     * Check to see if the ball should bounce off the random paddle.
+     * If touching the random paddle the ball is bouncing off.
      */
     private void checkBounceOffRandPaddle()
     {
@@ -242,7 +258,7 @@ public class Ball extends Actor
     
     /**
      * Check to see if the ball should be restarted.
-     * If touching the floor the ball is restarted in initial position and speed.
+     * If touching the floor the game is restarted.
      */
     private void checkRestart()
     {

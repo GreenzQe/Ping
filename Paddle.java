@@ -29,6 +29,9 @@ public class Paddle extends Actor
     /**
      * Act - do whatever the Paddle wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
+     * 
+     * Adds simple movement.
+     * Displays a little animation when the ball hits the paddle.
      */
     public void act() {
         level = Ball.getLevel();

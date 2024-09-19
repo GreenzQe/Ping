@@ -12,6 +12,8 @@ public class IntroWorld extends World
     
     /**
      * Constructor for objects of class IntroWorld.
+     * Displays the intro.
+     * Displays the previous games score if it was 1 or higher.
      */
     public IntroWorld()
     {
@@ -27,6 +29,9 @@ public class IntroWorld extends World
         
     }
     
+    /**
+     * Initiates PingWorld if the enter key is pressed.
+     */
     public void act()
     {
         String key = Greenfoot.getKey();

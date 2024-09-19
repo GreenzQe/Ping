@@ -15,6 +15,8 @@ public class PingWorld extends World
     GreenfootSound sound = new GreenfootSound("Music.wav");
     /**
      * Constructor for objects of class PingWorld.
+     * adds objects Ball, Paddle and RandPaddle.
+     * Starts the game music.
      */
     public PingWorld(boolean gameStarted)
     {
@@ -35,6 +37,10 @@ public class PingWorld extends World
         }
     }
     
+    /**
+     * Shows the score and level counter in the top left corner.
+     * Stops the music and shows IntroWorld if the game ends.
+     */
     public void act() {
         showText("Score: " + Ball.getCounter() + "  Level: " + Ball.getLevel(), 100, 30);
         /*
