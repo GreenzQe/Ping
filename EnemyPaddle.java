@@ -23,14 +23,13 @@ public class EnemyPaddle extends Actor
     }
     
     /**
-     * Act - do whatever the CopyOfRandPaddle wants to do. This method is called whenever
+     * Act - do whatever the EnemyPaddle wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
-     * Moves the paddle.
+     * Moves the paddle towards the x coordinate of the ball.
      */
     public void act()
     {
         getBallLocation();
-        
     }
     
     /**
@@ -43,6 +42,10 @@ public class EnemyPaddle extends Actor
         image.fill();
         setImage(image);
     }
+    
+    /**
+     * Gets the x location of the ball and moves the paddle towards it.
+     */
     private void getBallLocation() {
         Ball ball = (Ball) getWorld().getObjects(Ball.class).get(0);
         if (ball != null) {
