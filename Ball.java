@@ -98,6 +98,7 @@ public class Ball extends Actor
             checkBounceOffCeiling();
             checkBounceOffPaddle();
             checkBounceOffRandPaddle();
+            checkBounceOffEnemyPaddle();
             checkRestart();
         }
         if (counter >= 10) {
@@ -128,6 +129,22 @@ public class Ball extends Actor
      */
     private boolean isTouchingRandPaddleDirection() {
         if (isTouching(RandPaddle.class) && getRotation() >= 180)
+        {
+            revertVertically();
+            Greenfoot.playSound("PadHit.wav");
+            //Greenfoot.stop();
+            return (getY() <= BALL_SIZE/2);
+        } else {
+            return false;
+        }
+    }
+    
+        /**
+     * Checks if the ball is touching the Random Paddle and from which direction.
+     * 
+     */
+    private boolean isTouchingEnemyPaddleDirection() {
+        if (isTouching(EnemyPaddle.class) && getRotation() >= 180)
         {
             revertVertically();
             Greenfoot.playSound("PadHit.wav");
@@ -244,6 +261,25 @@ public class Ball extends Actor
     private void checkBounceOffRandPaddle()
     {
         if (isTouchingRandPaddleDirection() && !hasBouncedVertically)
+        {
+            if (! hasBouncedVertically)
+            {
+                revertVertically();
+            }
+        }
+        else
+        {
+            hasBouncedVertically = false;
+        }
+    }  
+    
+             /**
+     * Check to see if the ball should bounce off the random paddle.
+     * If touching the random paddle the ball is bouncing off.
+     */
+    private void checkBounceOffEnemyPaddle()
+    {
+        if (isTouchingEnemyPaddleDirection() && !hasBouncedVertically)
         {
             if (! hasBouncedVertically)
             {
