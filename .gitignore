@@ -1,6 +1,10 @@
 # Compiled class file
 *.class
 
+# Greenfoot
+.greenfoot
+.xml
+
 # Log file
 *.log
 
